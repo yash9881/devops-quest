@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevOps Quest: From Beginner to DevOps Engineer</title>
+  <meta name="description" content="An interactive, RPG-style gamified learning platform to transform beginners into job-ready DevOps Engineers.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- Header Area -->
+    <header class="glass-panel">
+      <div class="branding">
+        <h1 id="app-title">DEVOPS QUEST</h1>
+        <p>From Beginner to Job-Ready Cloud & DevOps Engineer</p>
+      </div>
+      <div class="audio-controls">
+        <button id="sfx-toggle" class="btn-secondary" style="padding: 6px 12px; font-size: 12px;">🔈 SFX: ON</button>
+        <button id="reset-btn" class="btn-secondary" style="padding: 6px 12px; font-size: 12px; border-color: var(--neon-pink); color: var(--neon-pink);">Reset Quest</button>
+      </div>
+    </header>
+
+    <!-- Left Character Sidebar -->
+    <aside class="character-sidebar">
+      
+      <!-- Character Profile Card -->
+      <div class="glass-panel profile-card glow-cyan-hover">
+        <div class="avatar-wrapper">
+          <div class="avatar-img" id="char-avatar">🧙‍♂️</div>
+        </div>
+        <div class="profile-info">
+          <h3 id="char-name">DevOps Recruit</h3>
+          <p id="char-title">Apprentice Initiate 🐚</p>
+          <button id="edit-profile-btn" class="btn-secondary" style="padding: 3px 6px; font-size: 10px; margin-top: 4px;">Edit Hero</button>
+        </div>
+      </div>
+
+      <!-- Level & XP Tracker -->
+      <div class="glass-panel glow-purple-hover">
+        <h4 style="color: var(--text-bright); font-size: 15px; margin-bottom: 6px;">Character Status</h4>
+        <div class="xp-container">
+          <div class="xp-header">
+            <span>LEVEL <strong id="status-level">1</strong></span>
+            <span><strong id="status-xp-current">0</strong> / <span id="status-xp-needed">1000</span> XP</span>
+          </div>
+          <div class="xp-bar-bg">
+            <div class="xp-bar-fill" id="status-xp-bar"></div>
+          </div>
+        </div>
+        
+        <!-- Attributes Stats -->
+        <h5 style="color: var(--text-bright); font-size: 12px; margin-top: 16px; margin-bottom: 8px; text-transform: uppercase;">Attributes</h5>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-label">Linux (LN)</div>
+            <div class="stat-val" id="stat-linux">1</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Network (NW)</div>
+            <div class="stat-val" id="stat-networking">1</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Git (GC)</div>
+            <div class="stat-val" id="stat-git">1</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Cloud (CL)</div>
+            <div class="stat-val" id="stat-cloud">1</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Containers (CN)</div>
+            <div class="stat-val" id="stat-containers">1</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">CI/CD (CD)</div>
+            <div class="stat-val" id="stat-cicd">1</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trophies & Badges Rack -->
+      <div class="glass-panel">
+        <h4 style="color: var(--text-bright); font-size: 15px; margin-bottom: 10px;">Trophy Room</h4>
+        <div class="badge-rack" id="badge-rack">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- Daily / Weekly Quest Log -->
+      <div class="glass-panel">
+        <h4 style="color: var(--text-bright); font-size: 15px; margin-bottom: 12px;">Quest Log</h4>
+        <div class="quests-board" id="quest-log-board">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Dynamic Content Workspace -->
+    <main class="workspace-panel">
+      
+      <!-- Primary Workspace Navigation Tabs -->
+      <nav class="view-tabs glass-panel" style="padding: 10px 16px;">
+        <button class="tab-btn active" data-view="dashboard">🏰 Dashboard</button>
+        <button class="tab-btn" data-view="skills">🌳 Skill Tree</button>
+        <button class="tab-btn" data-view="quest-room">⚔️ Quest Room</button>
+        <button class="tab-btn" data-view="interview">🎓 Interview Prep</button>
+        <button class="tab-btn" data-view="resume">🛡️ Resume Armory</button>
+      </nav>
+
+      <!-- VIEW: Dashboard -->
+      <div id="view-dashboard" class="view-pane" style="display: block;">
+        <div class="glass-panel" style="margin-bottom: 24px;">
+          <h2 style="color: var(--text-bright); margin-bottom: 8px;">Welcome to DevOps Quest!</h2>
+          <p>Embark on an RPG journey to master the concepts and tools required for modern Cloud and DevOps engineering roles. Complete quests, unlock skills on the tree, defeat boss battles, and build production-grade architectures to arm your resume.</p>
+        </div>
+        
+        <h3 style="color: var(--text-bright); margin-bottom: 16px;">Choose Your Adventure Level</h3>
+        <div class="level-select-grid">
+          <!-- Level 1 Card -->
+          <div class="glass-panel level-card glow-cyan-hover" data-level-select="1">
+            <div class="level-icon">🐚</div>
+            <h4>Level 1</h4>
+            <p style="color: var(--neon-cyan); font-weight: 700; margin-bottom: 8px;">DEVOPS APPRENTICE</p>
+            <p>Build strong foundations in Linux systems, networks, Git collaboration, AWS Cloud instances, and Docker containers.</p>
+          </div>
+          <!-- Level 2 Card -->
+          <div class="glass-panel level-card glow-purple-hover locked" id="level-card-2" data-level-select="2">
+            <div class="level-icon">⚔️</div>
+            <h4>Level 2</h4>
+            <p style="color: var(--neon-purple); font-weight: 700; margin-bottom: 8px;">DEVOPS ADVENTURER</p>
+            <p>Master CI/CD pipelines (Jenkins, GitHub Actions), Infrastructure as Code (Terraform), Kubernetes orchestration, and Monitoring stacks.</p>
+          </div>
+          <!-- Level 3 Card -->
+          <div class="glass-panel level-card locked" id="level-card-3" data-level-select="3">
+            <div class="level-icon">👑</div>
+            <h4>Level 3</h4>
+            <p style="color: var(--neon-gold); font-weight: 700; margin-bottom: 8px;">DEVOPS ENGINEER</p>
+            <p>Construct 3 industry-grade resume projects covering multi-AZ EKS systems, microservices routing, code quality gates, and advanced telemetry.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: Skill Tree -->
+      <div id="view-skills" class="view-pane" style="display: none;">
+        <div class="glass-panel" style="margin-bottom: 20px;">
+          <h2 style="color: var(--text-bright); margin-bottom: 6px;">The Skill Tree</h2>
+          <p>Unlock nodes sequentially as you complete chapters. Click on an unlocked node to navigate directly to its quest in the Quest Room.</p>
+        </div>
+        <div class="skill-tree-container" id="skill-tree-canvas-container">
+          <svg class="skill-tree-svg" id="skill-tree-svg"></svg>
+          <!-- Nodes injected dynamically -->
+        </div>
+      </div>
+
+      <!-- VIEW: Quest Room -->
+      <div id="view-quest-room" class="view-pane" style="display: none;">
+        <div class="quest-layout">
+          <!-- Left Quest Chapters List -->
+          <div class="quest-navigation-list" id="quest-chapters-nav">
+            <!-- Injected dynamically -->
+          </div>
+          
+          <!-- Right Active Chapter Learning Panel -->
+          <div class="glass-panel" id="chapter-learning-panel" style="min-height: 400px;">
+            <!-- Tab Headers for Chapters -->
+            <div class="chapter-tabs" id="chapter-tab-headers">
+              <button class="sub-tab-btn active" data-subtab="story">📖 Scroll of Story</button>
+              <button class="sub-tab-btn" data-subtab="concept">🧠 Scroll of Knowledge</button>
+              <button class="sub-tab-btn" data-subtab="diagram">🌐 Tactical Holo-map</button>
+              <button class="sub-tab-btn" data-subtab="handson">⚔️ Combat Trial</button>
+              <button class="sub-tab-btn" data-subtab="boss">👹 Boss Battle</button>
+            </div>
+
+            <!-- Active Chapter Content Areas -->
+            <div id="chapter-content-body">
+              <!-- Content loaded dynamically by app.js -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: Interview Prep -->
+      <div id="view-interview" class="view-pane" style="display: none;">
+        <div class="glass-panel" style="margin-bottom: 20px;">
+          <h2 style="color: var(--text-bright); margin-bottom: 6px;">Guild Hall: Interview Preparation</h2>
+          <p>Sharpen your arguments. Drill down on the top questions asked in DevOps and Cloud interviews, toggleable between Beginner, Intermediate, and Real-world Scenario perspectives.</p>
+        </div>
+        <div class="interview-search-bar">
+          <input type="text" id="interview-search" class="search-input" placeholder="Filter questions by tool name or topic (e.g. Docker, DNS, CI/CD)...">
+        </div>
+        <div class="interview-questions-list" id="interview-questions-list">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+
+      <!-- VIEW: Resume Armory -->
+      <div id="view-resume" class="view-pane" style="display: none;">
+        <div class="glass-panel" style="margin-bottom: 20px;">
+          <h2 style="color: var(--text-bright); margin-bottom: 6px;">The Armory: Resume & Portfolio Builder</h2>
+          <p>Equip your public profiles. Complete Level 3 projects to unlock copy-paste ready ATS bullet points, detailed LinkedIn write-ups, and structured GitHub README structures.</p>
+        </div>
+        <div class="project-selector" id="resume-project-selector">
+          <!-- Injected dynamically -->
+        </div>
+        <div id="resume-details-container">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- MODAL: Edit Profile -->
+  <div class="modal-overlay" id="edit-profile-modal">
+    <div class="glass-panel modal-card modal-glow-cyan">
+      <h3 class="modal-title">Customize Hero</h3>
+      <div style="margin: 20px 0; display: flex; flex-direction: column; gap: 16px; text-align: left;">
+        <div>
+          <label style="font-size: 13px; color: var(--text-dim); display: block; margin-bottom: 6px;">Hero Name</label>
+          <input type="text" id="hero-name-input" class="search-input" style="width: 100%;" value="DevOps Recruit">
+        </div>
+        <div>
+          <label style="font-size: 13px; color: var(--text-dim); display: block; margin-bottom: 6px;">Hero Class Avatar</label>
+          <div style="display: flex; justify-content: space-around; font-size: 28px;">
+            <span class="avatar-select-btn" style="cursor: pointer; padding: 6px; border-radius: 6px; border: 1px solid transparent;" data-avatar="🧙‍♂️">🧙‍♂️</span>
+            <span class="avatar-select-btn" style="cursor: pointer; padding: 6px; border-radius: 6px; border: 1px solid transparent;" data-avatar="🛡️">🛡️</span>
+            <span class="avatar-select-btn" style="cursor: pointer; padding: 6px; border-radius: 6px; border: 1px solid transparent;" data-avatar="🥷">🥷</span>
+            <span class="avatar-select-btn" style="cursor: pointer; padding: 6px; border-radius: 6px; border: 1px solid transparent;" data-avatar="🏹">🏹</span>
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 12px; justify-content: center;">
+        <button id="save-profile-btn" class="btn-primary">Save Hero</button>
+        <button id="close-profile-modal" class="btn-secondary">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Level Up Alert -->
+  <div class="modal-overlay" id="levelup-modal">
+    <div class="glass-panel modal-card modal-glow-cyan">
+      <h3 style="color: var(--neon-cyan); text-shadow: var(--glow-cyan); font-size: 20px;">RANK ADVANCEMENT!</h3>
+      <h2 class="modal-title" style="margin-top: 10px;">LEVEL UP</h2>
+      <div class="modal-icon" style="color: var(--neon-cyan);">⚡</div>
+      <p style="margin-bottom: 12px;">Congratulations, recruit! You have ascended to <strong>Level <span id="levelup-lvl-num">2</span></strong>!</p>
+      <p id="levelup-title-text" style="color: var(--neon-green); font-weight: 700; margin-bottom: 20px;">Platform Squire 🛡️</p>
+      <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; margin-bottom: 20px; font-size: 13px;">
+        <h4 style="margin-bottom: 6px; color: var(--text-bright);">Attributes Increased!</h4>
+        <div id="levelup-stats-list" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+      <button id="levelup-modal-close" class="btn-primary" style="width: 100%;">Continue Quest</button>
+    </div>
+  </div>
+
+  <!-- MODAL: Badge / Achievement Alert -->
+  <div class="modal-overlay" id="badge-modal">
+    <div class="glass-panel modal-card modal-glow-purple">
+      <h3 style="color: var(--neon-purple); text-shadow: var(--glow-purple); font-size: 20px;">ACHIEVEMENT UNLOCKED</h3>
+      <h2 class="modal-title" id="badge-modal-name">Trophy Unlocked</h2>
+      <div class="modal-icon" id="badge-modal-icon">🏆</div>
+      <p id="badge-modal-desc" style="margin-bottom: 24px;">You have achieved a grand milestone in your DevOps quest!</p>
+      <button id="badge-modal-close" class="btn-primary" style="width: 100%;">Collect Reward</button>
+    </div>
+  </div>
+
+  <!-- Live Notifications Corner -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Data and Logic Module Imports -->
+  <script src="js/level1_data.js"></script>
+  <script src="js/level2_data.js"></script>
+  <script src="js/level3_data.js"></script>
+  <script src="js/skills.js"></script>
+  <script src="js/gamification.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
